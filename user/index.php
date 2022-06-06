@@ -77,7 +77,7 @@ function truncate($string, $length, $dots = "...") {
         foreach ($rows as $subject) {
             $i++;
             $subjectid = $subject['subject_id'];
-            $subjectname = truncate($subject['subject_name'],30);
+            $subjectname = truncate($subject['subject_name'],25);
             $subjectprice = number_format((float)$subject['subject_price'], 2, '.', ''); 
             $subjectrate = $subject['subject_rating'];
             $subjectsession = $subject['subject_sessions'];
