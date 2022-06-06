@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username   = "root";
 $password   = "";
-$dbname     = "mytutorweb";
+$dbname     = "slumber6_mytutordb";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -11,4 +11,3 @@ try {
     echo $sql . "<br>" . $e->getMessage();
 }
 ?>
-

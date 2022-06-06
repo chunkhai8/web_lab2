@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         $_SESSION["sessionid"] = session_id();
         $_SESSION["email"] = $email ;
         echo "<script>alert('Login Success');</script>";
-        echo "<script> window.location.replace('index.php')</script>";
+        echo "<script> window.location.replace('mainpage.php')</script>";
     } else {
         echo "<script>alert('Login Failed');</script>";
         echo "<script> window.location.replace('login.php')</script>";
@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body onload="loadCookies()" style="background-color:lightblue;">
-    <div style="display:flex; justify-content: center;margin-top:50px">
+    <div style="display:flex; justify-content: center;margin-top:10%">
         <div class="w3-container w3-card w3-padding w3-margin w3-yellow" style="width:600px;margin:auto;text-align:left;">
             <form name="loginForm" action="login.php" method="post">
                 <header class="w3-header w3-center w3-padding-8">

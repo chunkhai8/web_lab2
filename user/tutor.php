@@ -5,8 +5,8 @@ if (!isset($_SESSION['sessionid'])) {
     echo "<script> window.location.replace('login.php')</script>";
 }
 include 'dbconnect1.php';
-$sqlsubject = "SELECT * FROM `tbl_subjects`";
-$stmt = $conn->prepare($sqlsubject);
+$sqltutors = "SELECT * FROM `tbl_tutors`";
+$stmt = $conn->prepare($sqltutors);
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $rows = $stmt->fetchAll();
@@ -20,12 +20,12 @@ if (isset($_GET['pageno'])) {
     $page_first_result = 0;
 }
 
-$stmt = $conn->prepare($sqlsubject);
+$stmt = $conn->prepare($sqltutors);
 $stmt->execute();
 $number_of_result = $stmt->rowCount();
 $number_of_page = ceil($number_of_result / $results_per_page);
-$sqlsubject = $sqlsubject . " LIMIT $page_first_result , $results_per_page";
-$stmt = $conn->prepare($sqlsubject);
+$sqltutors = $sqltutors . " LIMIT $page_first_result , $results_per_page";
+$stmt = $conn->prepare($sqltutors);
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $rows = $stmt->fetchAll();
@@ -42,7 +42,7 @@ function truncate($string, $length, $dots = "...") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../user/css/style.css">
+    <link rel="stylesheet" href="../user/css/style.css">  
     <title>Document</title>
 </head>
 <body style="background-color:lightblue;">
@@ -65,46 +65,38 @@ function truncate($string, $length, $dots = "...") {
         <a href="mainpage.php" class="w3-bar-item w3-button w3-text-black w3-right">Back</a>
     </div>
 
-
     <div class="w3-container w3-padding-16 w3-center " style="font-size: 25px;">
-        <h><b>Subject Lists</b></h>
+        <h><b>Tutor Lists</b></h>
     </div>
 
     <div class="w3-container">
     <div class="w3-grid-template">
         <?php
         $i = 0;
-        foreach ($rows as $subject) {
+        foreach ($rows as $tutors) {
             $i++;
-            $subjectid = $subject['subject_id'];
-            $subjectname = truncate($subject['subject_name'],30);
-            $subjectprice = number_format((float)$subject['subject_price'], 2, '.', ''); 
-            $subjectrate = $subject['subject_rating'];
-            $subjectsession = $subject['subject_sessions'];
-            $subjectdescript = $subject['subject_description'];
+            $tutorid = $tutors['tutor_id'];
+            $tutorname = truncate($tutors['tutor_name'],25);
+            $tutoremail = $tutors['tutor_email'];
+            $tutorphone = $tutors['tutor_phone'];
+            $tutordescript = $tutors['tutor_description'];
             echo "<div class='w3-card-4 w3-round' style='margin:4px'>
-            <header class='w3-container w3-yellow'>
-                <h5><b>$subjectname</b></h5>
-            </header>";
-            echo "<img class='w3-image' src=../assets/courses/$subjectid.png". //C:\xampp\htdocs\mytutorweb\assets\courses\1.png
+            <header class='w3-container w3-yellow'><h5><b>$tutorname</b></h5></header>";
+            echo "<img class='w3-image' src=../assets/tutors/$tutorid.jpg" .
                 " onerror=this.onerror=null;this.src='../../user/refer/pictureerror.png'"
-                . " style='width:100%;height:250px'></a><hr>";
+                . " style='width:100%;height:300px'></a><hr>";
             echo "<div class='w3-container'>
-            <p><b>Rating:</b> $subjectrate
-            <br><b>Price: RM</b> $subjectprice
-            <br><b>Subject session:</b> $subjectsession
-            <br><b>Description:</b> $subjectdescript
-            <br>
+            <p><b>Email:</b> $tutoremail
+            <br><b>Phone Number:</b> $tutorphone
+            <br><b>Description:</b> $tutordescript
             </p></div>
-            </div>";
+            <br></div>";
             
         }
         ?>
     </div>
     </div>
     <br>
-
-    <div class="w3-container ">
     <?php
     $num = 1;
     if ($pageno == 1) {
@@ -127,7 +119,6 @@ function truncate($string, $length, $dots = "...") {
     <br>
     <br>
     <br>
-    </div>
 
     <div class=" w3-center w3-yellow w3-bottom" style="margin:0 auto;">
         <p> MyTutor&copy;</p>
