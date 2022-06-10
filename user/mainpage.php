@@ -25,7 +25,7 @@ $rows = $stmt->fetchAll();
     <title>Document</title>
 </head>
 <body style="background-color:lightblue;">
-<div class="w3-bar w3-yellow" style="font-size: 20px;font-family: 'Times New Roman', Times, serif;">
+    <div class="w3-bar w3-yellow" style="font-size: 20px;font-family: 'Times New Roman', Times, serif;">
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-text-black w3-right">Profile</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-text-black w3-right">Subscription</a>
         <a href="tutor.php" class="w3-bar-item w3-button w3-hide-small w3-text-black w3-right">Tutors</a>
